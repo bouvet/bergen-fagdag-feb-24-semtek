@@ -1,0 +1,11 @@
+bildele:HendelseShape
+    a sh:NodeShape ;
+    rdfs:comment "Bildele-hendelse" ;
+    sh:targetClass bildele:Hendelse ;
+    sh:property [
+        sh:path bildele:fraPlassering;
+        sh:minCount 1;
+        sh:maxCount 1;
+        sh:message "En hendelse må være knyttet til en plassering";
+        sh:severity sh:Violation;
+    ]  .

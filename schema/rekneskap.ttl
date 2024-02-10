@@ -1,0 +1,138 @@
+# @prefix : <http://www.semanticweb.org/daghovland/ontologies/2023/11/untitled-ontology-5/> .
+# @prefix owl: <http://www.w3.org/2002/07/owl#> .
+# @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+# @prefix xml: <http://www.w3.org/XML/1998/namespace> .
+# @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+# @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+# @prefix rek: <https://github.com/daghovland/rdf-rekneskap/schema/rekneskap#>  .
+# @base <http://www.semanticweb.org/daghovland/ontologies/2023/11/untitled-ontology-5/> .
+
+<https://github.com/daghovland/rdf-rekneskap/schema/rekneskap.ttl> rdf:type owl:Ontology .
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://github.com/daghovland/rdf-rekneskap#erKontoType
+rek:erKontoType rdf:type owl:ObjectProperty ;
+                                                          rdfs:label "er kontotype";
+                                                          rdfs:domain rek:RegnskapsKonto ;
+                                                          rdfs:range rek:AbstraktKonto .
+
+
+###  https://github.com/daghovland/rdf-rekneskap#fraKonto
+rek:fraKonto rdf:type owl:ObjectProperty ;
+                                                       rdfs:label "fra konto" ;
+                                                       rdfs:domain rek:Postering ;
+                                                       rdfs:range rek:RegnskapsKonto .
+
+
+###  https://github.com/daghovland/rdf-rekneskap#saldoForKonto
+rek:saldoForKonto rdf:type owl:ObjectProperty ,
+                                                                     owl:FunctionalProperty ;
+                                                            rdfs:label "saldo for konto" ;                                                                    
+                                                            rdfs:domain rek:KontoSaldo ;
+                                                            rdfs:range rek:RegnskapsKonto .
+
+
+###  https://github.com/daghovland/rdf-rekneskap#saldoForPeriode
+rek:saldoForPeriode rdf:type owl:ObjectProperty ,
+                                                                       owl:FunctionalProperty ;
+                                                            rdfs:label "saldo for periode" ;                                                                                                                                          
+                                                              rdfs:domain rek:KontoSaldo ;
+                                                              rdfs:range rek:RegnskapsPeriode .
+
+
+###  https://github.com/daghovland/rdf-rekneskap#tilKonto
+rek:tilKonto rdf:type owl:ObjectProperty ;
+                                                            rdfs:label "til konto" ;                                                                      
+                                                       rdfs:domain rek:Postering ;
+                                                       rdfs:range rek:RegnskapsKonto .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://github.com/daghovland/rdf-rekneskap#beløp
+rek:beløp rdf:type owl:DatatypeProperty ,
+                                                             owl:FunctionalProperty ;
+                                                    rdfs:range xsd:decimal ;
+                                                            rdfs:label "beløp" ;                                                                                                                        
+                                                    rdfs:comment "Beløpet en postering eller saldo er på." .
+
+
+###  https://github.com/daghovland/rdf-rekneskap#postertDato
+rek:postertDato rdf:type owl:DatatypeProperty ;
+                                                          rdfs:domain rek:Postering ;
+                                                          rdfs:range xsd:date ;
+                                                            rdfs:label "postert dato" ;                                                                                                                              
+                                                          rdfs:comment "Datoen en postering står på i regnskapet" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://github.com/daghovland/rdf-rekneskap#AbstraktKonto
+rek:AbstraktKonto rdf:type owl:Class ;
+                                                              rdfs:label "abstrakt konto" ;                                                                    
+                                                            rdfs:comment "Abstrakte regnskapskontoer. Har navn, og kanskje kode. Må knyttes til en organisasjon for å bli brukt i postering" .
+
+
+###  https://github.com/daghovland/rdf-rekneskap#KontoSaldo
+rek:KontoSaldo rdf:type owl:Class ;
+                                                            rdfs:label "konto-saldo" ;                                                                      
+                                                         rdfs:comment "Saldoen på en regnskaps-konto ved slutten av en periode" .
+
+
+###  https://github.com/daghovland/rdf-rekneskap#Organisasjon
+rek:Organisasjon rdf:type owl:Class ;
+                                                              rdfs:label "organisasjon" ;                                                                    
+                                                           rdfs:comment "En organisason som fører regnskap. En regnskapskonto hører alltid til akkurat en organisasjon" .
+
+
+###  https://github.com/daghovland/rdf-rekneskap#Postering
+rek:Postering rdf:type owl:Class ;
+                                                              rdfs:label "postering" ;                                                                    
+                                                        rdfs:comment "En postering i regnskapet. Har beløp, dato, fra-konto og til-konto." .
+
+
+###  https://github.com/daghovland/rdf-rekneskap#RegnskapsKonto
+rek:RegnskapsKonto rdf:type owl:Class ;
+                                                              rdfs:label "konto i regnskap" ;                                                                    
+                                                             rdfs:comment "En konkret regnskapskonto i en organisasjon. F.eks. \"Bankkonto 1234.56.7891\"" .
+
+
+###  https://github.com/daghovland/rdf-rekneskap#RegnskapsPeriode
+rek:RegnskapsPeriode rdf:type owl:Class ;
+                                                              rdfs:label "regnskapsperiode" ;                                                                    
+                                                               rdfs:comment """Perioder i et regnskap. Det typiske er kalenderår, men også f.eks. MVA-terminer o.l.
+Må ha akkurat en hver av prov:startedAtTime og prov:endedAtTime""" .
+
+rdfs:label rdfs:label "tittel".
+rdf:type rdfs:label "type".
+rdfs:comment rdfs:label "tekst".
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( rek:AbstraktKonto
+                rek:Organisasjon
+                rek:Postering
+                rek:RegnskapsKonto
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.25.2023-02-15T19:15:49Z) https://github.com/owlcs/owlapi

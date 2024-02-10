@@ -1,0 +1,15 @@
+begin
+
+# Endre denne til å legge inn hva som helst
+import data.ttl.
+
+# La denne være fast for å gi feilmeldinger
+INSERT { \
+    ?s a rdfox:ConstraintViolation . \
+    ?s ?p ?o \
+} WHERE { \
+    TT SHACL_DN { :shacl ?s ?p ?o} . \
+    FILTER(?p IN (sh:sourceShape, sh:resultMessage, sh:value)) \
+}
+
+commit

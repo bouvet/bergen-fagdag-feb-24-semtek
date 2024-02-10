@@ -1,0 +1,72 @@
+@page "/lookup"
+@using Rekneskap.Services
+@using System.Text.Json
+@using System.Web
+@using Microsoft.AspNetCore.WebUtilities
+@using Rekneskap.Models 
+@inject PosteringServiceJsonDOM PosteringSvc
+@inject NavigationManager NavManager
+
+<PageTitle>@SideObjekt.type_label @SideObjekt.label</PageTitle>
+
+<h1>@SideObjekt.type_label @SideObjekt.label</h1>
+<p>@SideObjekt.comment</p>
+
+<dl>
+    @foreach (var prop in propStrings)
+    {
+        <dt>
+            @if (prop.property_label != "")
+            {
+                @prop.property_label
+            } 
+            else
+            {
+                @prop.property
+            }
+        </dt>
+        <dd>
+            @if (prop.value_label != "")
+            {
+                var encodedUri = HttpUtility.UrlEncode(prop.value);
+                <a href="lookup?objectUri=@encodedUri">
+                    @prop.value_label
+                </a>
+            }
+            else
+            {
+                @prop.value
+            }
+        </dd>
+    }
+</dl>
+
+
+@code {
+    List<SparqlResultBinding> propStrings = new ();
+    RdfObject SideObjekt = new();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
+
+        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("objectUri", value: out var encodedObjectUri))
+        {
+            var objectUri = HttpUtility.UrlDecode(encodedObjectUri);
+            SideObjekt = await PosteringSvc.getObject(new Uri(objectUri));
+            var props = PosteringSvc.getObjectProperties(new Uri(objectUri));
+            await foreach (var prop in props)
+            {
+                if (!prop.ValueKind.Equals(JsonValueKind.Object))
+                {
+                    continue;
+                }
+
+                SparqlResultBinding bindingValue = SparqlQueryHelper.getObjectPropertyQueryBinding(prop);
+                propStrings.Add(bindingValue);           
+                this.StateHasChanged();
+            }
+        }
+    }
+    
+}

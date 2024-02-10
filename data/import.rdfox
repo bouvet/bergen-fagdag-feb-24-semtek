@@ -1,0 +1,32 @@
+# import - ../data/import.dlog
+# tupletable delete postering force
+# dsource deregister postering 
+
+
+
+dsource register "fact_bildelering" \
+    type delimitedFile \
+    file "fact_bildelering.csv" \
+    header true
+
+tupletable create fact_bildelering \
+    dataSourceName "fact_bildelering" \
+    "columns" 5 \
+    "1" "https://bouvet.no/fagdag-semtek/bildele-event_{row#}" \
+    "1.datatype" "iri" \
+    "2" "{1}" \
+    "2.datatype" "xsd:date" \
+    "2.if-empty" "absent" \
+    "4" "https://bouvet.no/fagdag-semtek/bildele-plassering_{2}" \ 
+    "3.datatype" "xsd:string" \
+    "3.if-empty" "absent" \
+    "4.datatype" "iri" \
+    "4" "https://bouvet.no/fagdag-semtek/bildele-biltype_{3}" \ 
+    "4.if-empty" "absent" \
+    "5.datatype" "iri" \
+    "5" "https://bouvet.no/fagdag-semtek/bildele-drivstoff_{4}" \ 
+    "5.if-empty" "absent" 
+
+    
+
+import import.dlog

@@ -1,0 +1,23 @@
+# This is used in the docker startup
+
+datasource.rdfox
+
+tupletables.rdfox
+
+set query.answer-format text/x.tab-separated-values-abbrev
+set output out
+
+prefixes.rdfox
+
+delete { GRAPH schema:shacl {?s ?p ?o} } where { GRAPH schema:shacl {?s ?p ?o} }
+#import  rekneskap.ttl
+importaxioms 
+
+import > schema:shacl bildele.shacl
+
+commitproc set commit-procedure.q
+
+import rekneskap.dlog
+
+#import.rdfox
+#daemon

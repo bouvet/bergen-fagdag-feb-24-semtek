@@ -1,0 +1,7 @@
+data/data.csv
+terraform/.terraform.lock.hcl
+terraform/.terraform/*
+docker/shell-root/*
+RDFox.lic
+Trafikk/Trafikk/bin
+Trafikk/Trafikk/obj

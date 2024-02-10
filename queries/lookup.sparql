@@ -1,0 +1,4 @@
+PREFIX rek: <https://github.com/daghovland/rdf-rekneskap#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+ SELECT * WHERE {<https://github.com/daghovland/rdf-rekneskap/schema/rekneskap> ?prop ?val. OPTIONAL{<https://github.com/daghovland/rdf-rekneskap/schema/rekneskap> rdfs:label ?object_label.}. OPTIONAL {?prop rdfs:label ?val_label}}

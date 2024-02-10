@@ -1,0 +1,7 @@
+[?hendelse, a, bildele:Hendelse],
+[?hendelse, bildele:fraPlassering, ?plassering],
+[?hendelse, prov:generatedAtTime, ?dato],
+[?hendelse, prov:locatedAt, ?plassering],
+[?hendelse, bildele:medDrivstoff, ?drivstoff]
+ :-
+    fact_bildelering(?hendelse, ?dato, ?plassering, ?biltype, ?drivstoff) .

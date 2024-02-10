@@ -1,0 +1,2 @@
+dstore create rekneskap type parallel-nn equality off 
+active rekneskap
