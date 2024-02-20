@@ -1,0 +1,11 @@
+SELECT 
+(SAMPLE(?e_label) AS ?elnet) (COUNT( ?ancestor) as ?ancestorCount) (GROUP_CONCAT(?ancestor_string;SEPARATOR=",") as ?allAncestors)
+WHERE {
+    ?e a elnet:ElectricalNetwork;
+        elnet:hasAncestorNetwork ?ancestor;
+        rdfs:label ?e_label.
+    ?ancestor rdfs:label ?ancestor_label.
+    BIND(STR(?ancestor_label) AS ?ancestor_string)
+}
+GROUP BY ?e
+LIMIT 1

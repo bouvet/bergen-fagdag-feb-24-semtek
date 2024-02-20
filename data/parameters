@@ -1,0 +1,13 @@
+# Use 'file' persistence
+persist-roles            file
+persist-ds               file
+
+
+# Enable loading of file: and https: URLs only
+# allowed-schemes-on-load  "file https"
+
+# Restrict importing, exporting and reading of shell scripts to the ``/opt/rdfox/data/`` directory
+sandbox-directory        data
+
+#license-file                /opt/rdfox/data/RDFox.lic
+api-log                   on

@@ -1,6 +1,0 @@
-datasource.rdfox
-tupletables.rdfox
-role create rekneskap
-grant privileges read,write >datastores|rekneskap to rekneskap
-grant privileges read >datastores| to rekneskap
-setup.rdfox

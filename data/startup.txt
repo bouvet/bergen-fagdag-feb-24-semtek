@@ -1,0 +1,7 @@
+learStartup:
+
+~/Nedlastinger/RDFox-linux-x86_64-7.0a/RDFox sandbox
+
+PW: Shortcut!
+
+PW dag: Spenning!

@@ -1,0 +1,23 @@
+@using Elnet.Services
+@using Elnet.Services.Interfaces
+@inject ISparqlQueryHelper _sparqlQueryHelper
+
+<h3>Network </h3>
+
+
+@code {
+    string network_name = "...";
+
+    protected override async Task OnInitializedAsync()
+    {
+        var queryString = await _sparqlQueryHelper.readquery("network");
+
+        var queryResults = _sparqlQueryHelper. GetSparqlResult(queryString);
+        await foreach (var queryResult in queryResults)
+        {
+            network_name = SparqlQueryHelper.getObjectQueryBidningValue(queryResult, "name");
+        }
+
+    }
+
+}

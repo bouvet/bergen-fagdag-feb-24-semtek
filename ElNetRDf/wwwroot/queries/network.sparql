@@ -1,0 +1,15 @@
+prefix xsd: <http://www.w3.org/2001/XMLSchema#> 
+prefix rdfox: <http://oxfordsemantic.tech/RDFox#>
+prefix schema: <http://oxfordsemantic.tech/shacl#>
+prefix ex: <http://example.com/data/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix rec: <https://rdf.equinor.com/ontology/record/> 
+prefix elnet: <http://fam.equinor.com/ElectricalNetwork/> 
+
+select ?name ?anlegg ?delnett where {
+    ?elnet rdfs:label ?name;
+        elnet:inFacility/rdfs:label ?anlegg.
+    ?elnet elnet:hasDecendantNetwork ?delnett
+
+}

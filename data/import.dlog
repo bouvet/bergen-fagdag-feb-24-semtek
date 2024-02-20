@@ -1,7 +1,13 @@
-[?hendelse, a, bildele:Hendelse],
-[?hendelse, bildele:fraPlassering, ?plassering],
-[?hendelse, prov:generatedAtTime, ?dato],
-[?hendelse, prov:locatedAt, ?plassering],
-[?hendelse, bildele:medDrivstoff, ?drivstoff]
- :-
-    fact_bildelering(?hendelse, ?dato, ?plassering, ?biltype, ?drivstoff) .
+[?elnet, elnet:inFacility, ?facility],
+[?elnet, a, elnet:ElectricalNetwork],
+[?facility, rdfs:label, ?facility_label],
+[?elnet, rdfs:label, ?elnet_label] :-
+    stidelnet(?tag, ?elnet,?elnet_label, ?parent, ?parent_label, ?timestamp, ?fambehaviourtime, ?facility, ?facility_label, ?cubicle_id) .
+
+[?elnet, elnet:hasParentNetwork, ?parent] :-
+    stidelnet(?tag, ?elnet,?elnet_label, ?parent, ?parent_label, ?timestamp, ?fambehaviourtime, ?facility, ?facility_label, ?cubicle_id) ,
+    FILTER(?parent_label != "").
+
+[?elnet, a, elnet:RootNetwork] :-
+    stidelnet(?tag, ?elnet,?elnet_label, ?parent, "", ?timestamp, ?fambehaviourtime, ?facility, ?facility_label, ?cubicle_id) .
+    

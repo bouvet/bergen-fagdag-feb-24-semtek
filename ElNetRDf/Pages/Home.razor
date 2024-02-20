@@ -1,0 +1,39 @@
+﻿@using Elnet.Services
+@using Elnet.Services.Interfaces
+@inject ISparqlQueryHelper _sparqlQueryHelper
+
+@page "/"
+
+<PageTitle>Root Networks</PageTitle>
+
+<h1>Root networks</h1>
+<ul>
+    @foreach (string network_name in networks)
+    {
+        <li>
+            @network_name       
+        </li>
+    }
+</ul>
+
+@code {
+    List<string> networks = new List<string>();
+    private bool _shouldRender = false;
+
+    protected override bool ShouldRender() => _shouldRender;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        var queryString = await _sparqlQueryHelper.readquery("root_networks");
+
+        var queryResults = _sparqlQueryHelper. GetSparqlResult(queryString);
+        await foreach (var queryResult in queryResults)
+        {
+            var network_name = SparqlQueryHelper.getObjectQueryBidningValue(queryResult, "name");
+            networks.Add(network_name);
+            _shouldRender = true;
+        }
+
+    }
+
+}

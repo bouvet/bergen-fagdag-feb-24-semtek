@@ -1,0 +1,5 @@
+Startup:
+
+~/RDFox-linux-x86_64-6.2/RDFox -server-directory data -role server-admin shell
+
+PW: Shortcut!

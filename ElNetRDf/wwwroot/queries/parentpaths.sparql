@@ -1,0 +1,15 @@
+SELECT 
+(SAMPLE(?anlegg) AS ?anlegg_navn) (SAMPLE(?e_label) AS ?root_net_name) (GROUP_CONCAT(?child_label ; SEPARATOR=" ") AS ?CHILDREN)
+WHERE {
+    ?elnet a elnet:RootNetwork;
+        rdfs:label ?e_label;
+        elnet:inFacility/rdfs:label ?anlegg.
+    
+
+    ?child elnet:hasParentNetwork* ?elnet.
+    ?child rdfs:label ?child_label;
+         elnet:inFacility ?facility.
+    ?facility rdfs:label ?facility_name.
+
+}
+GROUP BY ?elnet

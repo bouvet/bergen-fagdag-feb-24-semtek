@@ -5,3 +5,6 @@ docker/shell-root/*
 RDFox.lic
 Trafikk/Trafikk/bin
 Trafikk/Trafikk/obj
+data/STID.ElectricalNetwork.anon.csv
+ElNetRDf/bin
+ElNetRDf/obj

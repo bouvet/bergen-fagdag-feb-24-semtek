@@ -1,32 +1,45 @@
-# import - ../data/import.dlog
-# tupletable delete postering force
-# dsource deregister postering 
+active elnet
+import - import.dlog
+tupletable delete stidelnet force
+dsource deregister stidelnet
 
-
-
-dsource register "fact_bildelering" \
+dsource register stidelnet \
     type delimitedFile \
-    file "fact_bildelering.csv" \
+    file "STID.ElectricalNetwork.anon.csv" \
     header true
 
-tupletable create fact_bildelering \
-    dataSourceName "fact_bildelering" \
-    "columns" 5 \
-    "1" "https://bouvet.no/fagdag-semtek/bildele-event_{row#}" \
-    "1.datatype" "iri" \
-    "2" "{1}" \
-    "2.datatype" "xsd:date" \
+tupletable create stidelnet \
+    dataSourceName stidelnet \
+    table.name "STID.ElectricalNetwork" \
+    columns 10 \
+    "1" "{TagNo}" \
+    "1.datatype" "string" \
+    "2" "https://fam.equinor.com/electricalnetwork/{Facility}/{ElectricalNetworkId}" \
+    "2.datatype" "iri" \
     "2.if-empty" "absent" \
-    "4" "https://bouvet.no/fagdag-semtek/bildele-plassering_{2}" \ 
-    "3.datatype" "xsd:string" \
+    "3" "{ElectricalNetworkId}" \
+    "3.datatype" "string" \
     "3.if-empty" "absent" \
+    "3.invalid-literal-policy" "error" \
+    "4" "https://fam.equinor.com/electricalnetwork/{Facility}/{ParentElectricalNetworkId}" \
     "4.datatype" "iri" \
-    "4" "https://bouvet.no/fagdag-semtek/bildele-biltype_{3}" \ 
     "4.if-empty" "absent" \
-    "5.datatype" "iri" \
-    "5" "https://bouvet.no/fagdag-semtek/bildele-drivstoff_{4}" \ 
-    "5.if-empty" "absent" 
-
-    
+    "4.invalid-literal-policy" "error" \
+    "5" "{ParentElectricalNetworkId}" \
+    "5.datatype" "string" \
+    "5.if-empty" "absent" \
+    "5.invalid-literal-policy" "error" \    
+    "6" "{MessageTimestamp}" \
+    "6.datatype" "string" \
+    "6.if-empty" "absent" \
+    "7" "{FAMBehaviorTime}" \
+    "7.datatype" "string" \
+    "8" "https://fam.equinor.com/facility/{Facility}" \
+    "8.datatype" "iri" \
+    "9" "{Facility}" \
+    "9.datatype" "string" \
+    "10" "{CubicleId}" \
+    "10.datatype" "string" \
+    "10.if-empty" "absent"
 
 import import.dlog

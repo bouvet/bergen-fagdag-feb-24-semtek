@@ -1,0 +1,14 @@
+dstore create elnet type parallel-nn equality off 
+active elnet 
+set access-control-allow-origin *
+
+active elnet 
+set query.answer-format text/x.tab-separated-values-abbrev
+set output out
+prefixes.rdfox
+
+import ../elnet.ttl
+importaxioms
+
+import.rdfox
+import ancestor-relation.dlog
