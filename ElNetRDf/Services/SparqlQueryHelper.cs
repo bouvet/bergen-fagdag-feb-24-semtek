@@ -15,7 +15,7 @@ public class SparqlQueryHelper : ISparqlQueryHelper
     {
         _httpClientFactory = httpClientFactory;
     }
-    public async Task<string> readquery(string query_name)
+    public async Task<string> ReadQuery(string query_name)
     {
         var client = _httpClientFactory.CreateClient("self");
         var byteOfTheFile = await client.GetByteArrayAsync($"queries/{query_name}.sparql");
@@ -62,7 +62,7 @@ public class SparqlQueryHelper : ISparqlQueryHelper
     }
 
     // Gets the content / value of a bidingin in sparql-result
-    public static string getObjectQueryBidningValue(JsonElement binding, string key)
+    public static string getObjectQueryBindingValue(JsonElement binding, string key)
     {
         if (binding.TryGetProperty(key, out JsonElement keyElement)
             && keyElement.TryGetProperty("value", out JsonElement keyValue))
@@ -70,7 +70,7 @@ public class SparqlQueryHelper : ISparqlQueryHelper
         return "";
     }
 
-    public static string getSparqlUrl => "datastores/rekneskap/sparql";
+    public static string getSparqlUrl => "datastores/elnet/sparql";
 
     public static AuthenticationHeaderValue getAuth =>
         new AuthenticationHeaderValue(
@@ -81,7 +81,7 @@ public class SparqlQueryHelper : ISparqlQueryHelper
         var request = new HttpRequestMessage(HttpMethod.Post, getSparqlUrl);
         request.Headers.Add("Accept", "application/sparql-results+json");
         
-        request.Headers.Authorization = getAuth;
+        //request.Headers.Authorization = getAuth;
         request.Content = new StringContent(querystring, new System.Net.Http.Headers.MediaTypeHeaderValue("application/sparql-query"));
         return request;
     }

@@ -4,7 +4,7 @@ namespace Elnet.Services.Interfaces;
 
 public interface ISparqlQueryHelper
 {
-    public Task<string> readquery(string query_name);
+    public Task<string> ReadQuery(string queryName);
     public IAsyncEnumerable<JsonElement> GetSparqlResult(string queryString);
 
 }

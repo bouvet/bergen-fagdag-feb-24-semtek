@@ -24,12 +24,12 @@
     
     protected override async Task OnInitializedAsync()
     {
-        var queryString = await _sparqlQueryHelper.readquery("root_networks");
+        var queryString = await _sparqlQueryHelper.ReadQuery("root_networks");
 
         var queryResults = _sparqlQueryHelper. GetSparqlResult(queryString);
         await foreach (var queryResult in queryResults)
         {
-            var network_name = SparqlQueryHelper.getObjectQueryBidningValue(queryResult, "name");
+            var network_name = SparqlQueryHelper.getObjectQueryBindingValue(queryResult, "name");
             networks.Add(network_name);
             _shouldRender = true;
         }

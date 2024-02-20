@@ -18,7 +18,7 @@ builder.Services.AddHttpClient("self", httpClient =>
 builder.Services.AddHttpClient("rdfox", httpClient =>
 {
     var selfUri = new UriBuilder(builder.HostEnvironment.BaseAddress);
-    selfUri.Port =12110;
+    selfUri.Port = 12110;
     httpClient.BaseAddress = selfUri.Uri;
 });
 builder.Services.AddSingleton<ISparqlQueryHelper, SparqlQueryHelper>();
