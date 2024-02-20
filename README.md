@@ -15,7 +15,7 @@
 
 ## Timeplan
 * Første del: Introduksjon. Installasjon, nedlasting, kjøre import-skript. Se på dataene i rdf
-* Andre del: Vise og eksperimentere med Sparql og datalog.
+* Andre del: Vise og eksperimentere med [Sparql](./docs/sparql.md) og datalog.
 * Tredje del: Kjøre Sparql-spørringer fra blazor-webapp
 
 ## Dette repoet:
