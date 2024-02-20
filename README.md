@@ -18,3 +18,6 @@
 * Andre del: Vise og eksperimentere med Sparql og datalog.
 * Tredje del: Kjøre Sparql-spørringer fra blazor-webapp
 
+## Dette repoet:
+* data: RDFox oppsett, datalog-regler osv.
+* ElNetRDf: En asp.net blazor webapp. Også sparql-spørringene
