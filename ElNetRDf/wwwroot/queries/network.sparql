@@ -7,9 +7,10 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix rec: <https://rdf.equinor.com/ontology/record/> 
 prefix elnet: <http://fam.equinor.com/ElectricalNetwork/> 
 
-select ?name ?anlegg ?delnett where {
-    ?elnet rdfs:label ?name;
-        elnet:inFacility/rdfs:label ?anlegg.
-    ?elnet elnet:hasDecendantNetwork ?delnett
+select ?name ?anlegg ?delnett ?delnett_navn where {
+    @network rdfs:label ?name;
+        elnet:inFacility/rdfs:label ?anlegg;
+        ^elnet:hasParentNetwork ?delnett.
+    ?delnett rdfs:label ?delnett_navn.
 
 }

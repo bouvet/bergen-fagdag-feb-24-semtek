@@ -1,21 +1,39 @@
+@namespace Elnet.Components
 @using Elnet.Services
 @using Elnet.Services.Interfaces
+@using VDS.RDF.Query
 @inject ISparqlQueryHelper SparqlQueryHelper
 
-<h3>Network </h3>
-
-
+<b>Network</b>: <i>@NetworkName</i>. Children: 
+<ul>
+@foreach ((Uri networkUri, string networkName) in _childNetworks)
+    {
+        <li>
+        <Network NetworkName="@networkName" NetworkIri="@networkUri" />
+        </li>
+    }
+</ul>
 @code {
-    string _networkName = "...";
+    [Parameter]
+    public Uri? NetworkIri { get; set; }
+    
+    [Parameter]
+    public string? NetworkName { get; set; }    
+    
+    List<(Uri, string)> _childNetworks = new();
 
     protected override async Task OnInitializedAsync()
     {
-        var queryString = await SparqlQueryHelper.ReadQuery("network");
-
+        var queryTemplate = await SparqlQueryHelper.ReadQuery("network");
+        var parameterizedQuery = new SparqlParameterizedString(queryTemplate);
+        parameterizedQuery.SetUri("network", NetworkIri);
+        var queryString = parameterizedQuery.ToString();
         var queryResults = SparqlQueryHelper. GetSparqlResult(queryString);
         await foreach (var queryResult in queryResults)
         {
-            _networkName = Elnet.Services.SparqlQueryHelper.getObjectQueryBindingValue(queryResult, "name");
+            var networkName = Elnet.Services.SparqlQueryHelper.getObjectQueryBindingValue(queryResult, "delnett_navn");
+            var networkUri = Elnet.Services.SparqlQueryHelper.getObjectQueryBindingValue(queryResult, "delnett");
+            _childNetworks.Add((new Uri(networkUri), networkName));
         }
 
     }

@@ -1,4 +1,6 @@
-﻿@using Elnet.Services
+﻿@namespace Elnet.Pages
+@using Elnet.Services
+@using Elnet.Components
 @using Elnet.Services.Interfaces
 @inject ISparqlQueryHelper _sparqlQueryHelper
 
@@ -8,16 +10,16 @@
 
 <h1>Root networks</h1>
 <ul>
-    @foreach (string network_name in networks)
+    @foreach ((Uri networkUri, string networkName) in _networks)
     {
         <li>
-            @network_name       
+            <Network NetworkIri="@networkUri" NetworkName="@networkName" />
         </li>
     }
 </ul>
 
 @code {
-    List<string> networks = new List<string>();
+    List<(Uri, string)> _networks = new();
     private bool _shouldRender = false;
 
     protected override bool ShouldRender() => _shouldRender;
@@ -29,8 +31,9 @@
         var queryResults = _sparqlQueryHelper. GetSparqlResult(queryString);
         await foreach (var queryResult in queryResults)
         {
-            var network_name = SparqlQueryHelper.getObjectQueryBindingValue(queryResult, "name");
-            networks.Add(network_name);
+            var networkName = SparqlQueryHelper.getObjectQueryBindingValue(queryResult, "name");
+            var networkIri = SparqlQueryHelper.getObjectQueryBindingValue(queryResult, "elnet");
+            _networks.Add((new Uri(networkIri), networkName));
             _shouldRender = true;
         }
 
