@@ -5,7 +5,7 @@ dsource deregister stidelnet
 
 dsource register stidelnet \
     type delimitedFile \
-    file "STID.ElectricalNetwork.anon.csv" \
+    file "FACILITYX.csv" \
     header true
 
 tupletable create stidelnet \
