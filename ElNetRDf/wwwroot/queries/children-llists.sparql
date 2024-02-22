@@ -1,9 +1,6 @@
 SELECT 
 *
 WHERE {
-    ?elnet a elnet:RootNetwork;
-        rdfs:label ?e_label;
-        elnet:inFacility/rdfs:label ?anlegg;
-        elnet:hasChildren ?child_list.
+#Greier du hente ut hasChildren-relasjonen vi lagde ?
     
 }

@@ -1,0 +1,4 @@
+[?elnet, a, elnet:RootNetwork] :-
+    [?elnet, a, elnet:ElectricalNetwork], 
+    NOT EXISTS ?parent IN [?elnet, elnet:hasParentNetwork, ?parent] .
+
