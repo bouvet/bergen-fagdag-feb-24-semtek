@@ -1,0 +1,11 @@
+
+[?elnet, elnet:hasChildren, rdf:nil] :-
+    [?elnet, a, elnet:ElectricalNetwork] ,
+    NOT EXIST ?child IN [?child, elnet:hasParentNetwork, ?elnet].
+
+[?elnet, elnet:hasChildren, ?child_list],
+[?child_list, rdf:first, ?child],
+[?child_list, rdf:rest, ?child_child_list] :-
+    [?child, elnet:hasParentNetwork, ?elnet],
+    [?child, elnet:hasChildren, ?child_child_list],
+    SKOLEM("ChildList", ?elnet, ?child, ?child_list).

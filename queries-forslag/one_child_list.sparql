@@ -1,0 +1,10 @@
+SELECT 
+*
+WHERE {
+    <https://fam.equinor.com/electricalnetwork/ANON/21988>
+        rdfs:label ?e_label;
+        elnet:inFacility/rdfs:label ?anlegg;
+        elnet:hasChildren ?child_list.
+    ?child_list rdf:rest*/rdf:first ?child.
+    
+}

@@ -1,0 +1,61 @@
+
+# [?elnet, elnet:hasChildRelation, ?relation],
+# [?relation, elnet:hasLevel, 1],
+# [?relation, elnet:hasChild, ?child] :-
+#     [?child, elnet:hasParentNetwork, ?elnet] ,
+#     NOT EXISTS ?parent IN [?elnet, elnet:hasParentNetwork, ?parent],
+#     SKOLEM("Ancestor", ?elnet, ?child, ?relation) .
+
+# [?elnet, elnet:hasChildRelation, ?older_relation],
+# [?older_relation, elnet:hasLevel, ?older_level],
+# [?older_relation, elnet:hasChild, ?older_child] :-
+#     [?elnet, elnet:hasChildRelation, ?orig_relation],
+#     [?orig_relation, elnet:hasLevel, ?orig_level],
+#     [?orig_relation, elnet:hasChild, ?orig_child],
+#     FILTER (?elnet != ?orig_child),
+#     [?older_child, elnet:hasParentNetwork, ?orig_child] ,
+#     BIND(?orig_level + 1 AS ?older_level),
+#     SKOLEM("Ancestor", ?elnet, ?older_child, ?older_relation) .
+
+[?elnet, a, elnet:RootNetwork] :-
+    [?elnet, a, elnet:ElectricalNetwork], 
+    NOT EXISTS ?parent IN [?elnet, elnet:hasParentNetwork, ?parent] .
+
+# [?root, elnet:hasDecendantNetwork, ?child],
+# [?child, elnet:hasLevel, 1] 
+#  :-
+#     [?child, elnet:hasParentNetwork, ?root] .
+
+# [?root, elnet:hasDecendantNetwork, ?child], 
+# [?child, elnet:hasLevel, ?n_plus_1] :-
+#     [?root, elnet:hasDecendantNetwork, ?parent],
+#     [?parent, elnet:hasLevel, ?n],
+#     [?child, elnet:hasParentNetwork, ?parent] ,
+#     BIND(?n + 1 AS ?n_plus_1) .
+
+# [?root, elnet:hasDecendantNetwork, ?child]
+#  :-
+#     [?child, elnet:hasParentNetwork, ?root] .
+
+# [?root, elnet:hasDecendantNetwork, ?child] :-
+#     [?root, elnet:hasDecendantNetwork, ?parent],
+#     [?child, elnet:hasParentNetwork, ?parent] .
+
+
+
+[?elnet, elnet:hasAncestorNetwork, ?relation],
+[?relation, elnet:hasLevel, 1],
+[?relation, elnet:hasParent, ?parent] :-
+    [?elnet, elnet:hasParentNetwork, ?parent] ,
+    SKOLEM("Ancestor", ?elnet, ?parent, ?relation) .
+
+[?elnet, elnet:hasAncestorNetwork, ?older_relation],
+[?older_relation, elnet:hasLevel, ?n_plus_1],
+[?older_relation, elnet:hasParent, ?orig_parent] :-
+    [?parent, elnet:hasAncestorNetwork, ?orig_relation],
+   [?orig_relation, elnet:hasLevel, ?n],
+    [?orig_relation, elnet:hasParent, ?orig_parent] ,
+    [?elnet, elnet:hasParentNetwork, ?parent] ,
+    FILTER(?elnet != ?orig_parent),
+    BIND(?n +1 AS ?n_plus_1),
+    SKOLEM("Ancestor", ?elnet, ?orig_parent, ?older_relation).

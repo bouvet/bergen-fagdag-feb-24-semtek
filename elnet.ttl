@@ -33,7 +33,7 @@
 
 ###  http://fam.equinor.com/ElectricalNetwork#ElectricalNetwork
 :ElectricalNetwork rdf:type owl:Class ;
-                   rdfs:comment "Electircal Networks from fam-sql-gold" .
+                   rdfs:comment "Electrical Networks from fam-sql-gold" .
 
 
 ###  http://fam.equinor.com/ElectricalNetwork#Facility
