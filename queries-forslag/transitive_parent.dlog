@@ -1,0 +1,7 @@
+
+[?root, elnet:hasDescendantNetwork, ?child] :-
+    [?child, elnet:hasParentNetwork, ?root] .
+
+[?root, elnet:hasDescendantNetwork, ?child] :-
+    [?root, elnet:hasDescendantNetwork, ?parent],
+    [?child, elnet:hasParentNetwork, ?parent] .

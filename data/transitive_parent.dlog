@@ -1,0 +1,7 @@
+
+[?root, elnet:hasDescendantNetwork, ?child] :-
+    [?child, elnet:hasParentNetwork, ?root] .
+
+[?root, elnet:hasDescendantNetwork, ?child] :-
+    # Find an existing descendant network, and then add a parent network relation to it
+    

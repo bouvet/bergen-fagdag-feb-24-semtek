@@ -1,22 +1,15 @@
 
-[?elnet, a, elnet:RootNetwork] :-
-    [?elnet, a, elnet:ElectricalNetwork], 
-    NOT EXISTS ?parent IN [?elnet, elnet:hasParentNetwork, ?parent] .
-
 
 [?elnet, elnet:hasAncestorNetwork, ?relation],
 [?relation, elnet:hasLevel, 1],
 [?relation, elnet:hasParent, ?parent] :-
-    [?elnet, elnet:hasParentNetwork, ?parent] ,
+    # Ask for a single parent relation
     SKOLEM("Ancestor", ?elnet, ?parent, ?relation) .
 
 [?elnet, elnet:hasAncestorNetwork, ?older_relation],
 [?older_relation, elnet:hasLevel, ?n_plus_1],
 [?older_relation, elnet:hasParent, ?orig_parent] :-
-    [?parent, elnet:hasAncestorNetwork, ?orig_relation],
-   [?orig_relation, elnet:hasLevel, ?n],
-    [?orig_relation, elnet:hasParent, ?orig_parent] ,
-    [?elnet, elnet:hasParentNetwork, ?parent] ,
+    # Ask for an existing ancestor network, and add one parent relation to it
     FILTER(?elnet != ?orig_parent),
     BIND(?n +1 AS ?n_plus_1),
     SKOLEM("Ancestor", ?elnet, ?orig_parent, ?older_relation).

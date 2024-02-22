@@ -1,7 +1,14 @@
-SELECT 
-(SAMPLE(?anlegg) AS ?anlegg_navn) (SAMPLE(?e_label) AS ?root_net_name) (GROUP_CONCAT(?child_label ; SEPARATOR=" ") AS ?CHILDREN)
+SELECT
+ (SAMPLE(?e_label) AS ?root_net_name) (GROUP_CONCAT(?child_label ; SEPARATOR=" ") AS ?CHILDREN)
 WHERE {
-# Utvid root_networks til å også ta med alle barne-nettverk
+    ?elnet a elnet:RootNetwork;
+        rdfs:label ?e_label.
+        #elnet:inFacility/rdfs:label ?anlegg.
+    
+
+    ?child elnet:hasParentNetwork* ?elnet.
+    ?child rdfs:label ?child_label;
+         elnet:inFacility ?facility.
 
 }
 GROUP BY ?elnet

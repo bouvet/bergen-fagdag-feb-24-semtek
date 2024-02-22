@@ -1,0 +1,3 @@
+SELECT * WHERE {
+    ?parent elnet:hasDescendantNetwork ?desc.
+}

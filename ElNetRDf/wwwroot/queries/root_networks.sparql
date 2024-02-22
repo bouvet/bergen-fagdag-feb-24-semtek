@@ -7,7 +7,9 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix rec: <https://rdf.equinor.com/ontology/record/> 
 prefix elnet: <http://fam.equinor.com/ElectricalNetwork/> 
 
-select ?elnet ?name ?anlegg ?delnett where {
-# Hent ut all rot-nettverk, og navnet 
+#select ?elnet ?name ?anlegg ?delnett where {
+# Hent ut all rot-nettverk, og navnet, etterhvert også anlegg og delnett 
 
+SELECT * WHERE {
+#...
 } 
