@@ -33,6 +33,14 @@ Kjør den både med evaluate og i konsollen
 
 
 * Endre [transitive_parent.dlog](../data/transitive_parent.dlog) til å regne ut relasjonen mellom et nettverk og et som befinner seg etter en eller flere parent relasjoner.
-* * Målet er at [transitive_parent.sparql](../ElNetRDf/wwwroot/queries/transitive_parent.sparql) skal gi 3063 svar
+* * Målet er at [transitive_parent.sparql](../ElNetRDf/wwwroot/queries/transitive_parent.sparql) skal gi svar
+
+* Endre [ancestor-relation.dlog](../data/ancestor-relation.dlog) til å regne ut listen av barnenoder. 
+
+
+# Blazor
+
+Blazor installasjonen bruker spørringene [root_networks.sparql](../ElNetRDf/wwwroot/queries/root_networks.sparql) og [network.sparql](../ElNetRDf/wwwroot/queries/network.sparql). Når du er fornøyd med dem (Eller kopierer dem inn fra [../queries-forslag](../queries-forslag/) ) så kan du starte appen med `dotnet run`
+
 
 
