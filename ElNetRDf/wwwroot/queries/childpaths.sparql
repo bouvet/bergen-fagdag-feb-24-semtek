@@ -1,17 +1,7 @@
 SELECT 
 (SAMPLE(?e_label) AS ?root_net_name) (GROUP_CONCAT(?child_string ; SEPARATOR=" ") AS ?CHILDREN)
 WHERE {
-    ?elnet a elnet:RootNetwork;
-        rdfs:label ?e_label;
-        elnet:inFacility/rdfs:label ?anlegg.
-    
-
-    ?child elnet:hasAncestorNetwork ?anc_rel.
-    ?anc_rel elnet:hasParent ?elnet.
-    ?child rdfs:label ?child_label;
-         elnet:inFacility ?facility.
-    ?facility rdfs:label ?facility_name.
-
+    # Hent ut all info om elnett, barn og data
     BIND(CONCAT("FACILITY: ", ?facility_name, " ", STR(?child_label)) AS ?child_string)
 }
 GROUP BY ?elnet
