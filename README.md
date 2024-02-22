@@ -14,7 +14,10 @@
 * Vise frem svaret av spørringene
 
 ## Timeplan
-* Første del: Introduksjon. Installasjon, nedlasting, kjøre import-skript. Se på dataene i rdf
+* Første del: Introduksjon. Installasjon, nedlasting, kjøre import-skript. Se på dataene i rdf  
+* * [Oppsett](./docs/oppsett.md)
+* * [Utforsk](./docs/utforsk.md)
+* * [Oppgaver](./docs/Oppgave.md)
 * Andre del: Vise og eksperimentere med [Sparql](./docs/sparql.md) og datalog.
 * Tredje del: Kjøre Sparql-spørringer fra blazor-webapp
 

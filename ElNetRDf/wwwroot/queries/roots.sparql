@@ -1,4 +1,6 @@
 SELECT * WHERE {
     ?e a elnet:ElectricalNetwork.
+# Get also the rdfs:label of the network
     FILTER NOT EXISTS {?e elnet:hasParentNetwork ?parent}
+    # Get the facility of the network, and the label of that
 }

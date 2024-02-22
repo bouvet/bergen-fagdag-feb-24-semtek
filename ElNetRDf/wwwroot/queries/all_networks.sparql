@@ -7,6 +7,7 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix rec: <https://rdf.equinor.com/ontology/record/> 
 prefix elnet: <http://fam.equinor.com/ElectricalNetwork/> 
 
-select ?name ?anlegg ?delnett ?delnett_navn where {
-# Hent ut navn, anlegg og barne-nett av <https://fam.equinor.com/electricalnetwork/FACILITYX/104141> 
+select * where {
+# 1 Hent ut alle nettverk. (De har typen elnet:Network)
+# 2. Hent også ut navnet, rdfs:label
 }

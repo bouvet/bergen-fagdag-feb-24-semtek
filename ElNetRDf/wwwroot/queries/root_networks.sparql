@@ -8,9 +8,6 @@ prefix rec: <https://rdf.equinor.com/ontology/record/>
 prefix elnet: <http://fam.equinor.com/ElectricalNetwork/> 
 
 select ?elnet ?name ?anlegg ?delnett where {
-    ?elnet a elnet:RootNetwork;
-        rdfs:label ?name;
-        elnet:inFacility/rdfs:label ?anlegg.
-    OPTIONAL{?elnet elnet:hasDecendantNetwork ?delnett}
+# Hent ut all rot-nettverk, og navnet 
 
-} LIMIT 10
+} 

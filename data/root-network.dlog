@@ -1,4 +1,4 @@
 [?elnet, a, elnet:RootNetwork] :-
     [?elnet, a, elnet:ElectricalNetwork], 
-    NOT EXISTS ?parent IN [?elnet, elnet:hasParentNetwork, ?parent] .
+    # Filter out all nodes of which some other node is a parent .
 

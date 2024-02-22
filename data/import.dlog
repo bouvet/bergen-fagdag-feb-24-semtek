@@ -1,6 +1,6 @@
 [?elnet, elnet:inFacility, ?facility],
 [?elnet, a, elnet:ElectricalNetwork],
-[?facility, rdfs:label, ?facility_label],
+# Add the triple that gives the facility a label
 [?elnet, rdfs:label, ?elnet_label] :-
     stidelnet(?tag, ?elnet,?elnet_label, ?parent, ?parent_label, ?timestamp, ?fambehaviourtime, ?facility, ?facility_label, ?cubicle_id) .
 
