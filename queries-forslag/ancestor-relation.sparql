@@ -1,0 +1,8 @@
+select ?name ?level ?parent_name where {
+    ?e elnet:hasAncestorNetwork ?rel;
+        rdfs:label ?name.
+    ?rel elnet:hasLevel ?level;
+        elnet:hasParent ?parent.
+        ?parent rdfs:label ?parent_name.
+    ?parent a elnet:RootNetwork.
+}
