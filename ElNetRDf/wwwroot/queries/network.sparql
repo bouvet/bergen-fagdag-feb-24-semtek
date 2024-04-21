@@ -8,5 +8,9 @@ prefix rec: <https://rdf.equinor.com/ontology/record/>
 prefix elnet: <http://fam.equinor.com/ElectricalNetwork/> 
 
 select ?name ?anlegg ?delnett ?delnett_navn where {
-# Hent ut navn, anlegg og barne-nett av <https://fam.equinor.com/electricalnetwork/FACILITYX/104141> 
+    @network rdfs:label ?name;
+        elnet:inFacility/rdfs:label ?anlegg;
+        ^elnet:hasParentNetwork ?delnett.
+    ?delnett rdfs:label ?delnett_navn.
+
 }
